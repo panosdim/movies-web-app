@@ -15,14 +15,8 @@ export type Movie = {
     vote_average: number;
 };
 
-export interface Globals {
+export interface LoginInfo {
     isLoggedIn: boolean;
-    user: {
-        id: number;
-        email: string;
-        firstName: string;
-        lastName: string;
-    };
 }
 
 export type UserType = {

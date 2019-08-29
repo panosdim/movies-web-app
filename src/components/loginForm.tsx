@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { Globals, User } from '../model';
+import { LoginInfo, User } from '../model';
 import { useGlobal } from 'reactn';
 // @ts-ignore
 import { toast } from 'bulma-toast';
@@ -9,7 +9,7 @@ export const LoginForm: React.FC = () => {
     const [isLoading, setLoading] = useState(false);
     const loginFormRef = useRef<HTMLFormElement>(null);
     const [user, setUser] = useGlobal<User>('user');
-    const [isLoggedIn, setLoggedIn] = useGlobal<Globals>('isLoggedIn');
+    const [isLoggedIn, setLoggedIn] = useGlobal<LoginInfo>('isLoggedIn');
     const [values, setValues] = useState<FormData>({});
 
     type FormData = { [key: string]: string };

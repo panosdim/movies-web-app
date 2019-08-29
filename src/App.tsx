@@ -3,7 +3,7 @@ import './App.css';
 import { Login, Main } from './pages';
 import axios from 'axios';
 import { useGlobal, setGlobal } from 'reactn';
-import { Globals } from './model';
+import { LoginInfo, User } from './model';
 
 // TODO: Change to production
 axios.defaults.baseURL = 'http://localhost:8000/';
@@ -17,8 +17,8 @@ setGlobal({
 });
 
 const App: React.FC = () => {
-    const [isLoggedIn, setLoggedIn] = useGlobal<Globals>('isLoggedIn');
-    const [, setUser] = useGlobal<Globals>('user');
+    const [isLoggedIn, setLoggedIn] = useGlobal<LoginInfo>('isLoggedIn');
+    const [, setUser] = useGlobal<User>('user');
     const [isLoading, setLoading] = useState(true);
 
     React.useEffect(() => {

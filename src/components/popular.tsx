@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Movie } from '../model';
 
 export const Popular: React.FC = () => {
     const [popular, setPopular] = useState();
@@ -20,31 +21,23 @@ export const Popular: React.FC = () => {
             </div>
             <div className='columns'>
                 {popular &&
-                    popular
-                        .slice(1, 5)
-                        .map(
-                            (movie: {
-                                poster_path: string;
-                                original_title: React.ReactNode;
-                                overview: React.ReactNode;
-                            }) => (
-                                <div className='column'>
-                                    <div className='card'>
-                                        <div className='card-image'>
-                                            <figure className='image'>
-                                                <img src={baseUrl + movie.poster_path} alt='Movie Poster' />
-                                            </figure>
-                                        </div>
-                                        <div className='card-content'>
-                                            <div className='content'>
-                                                <h2>{movie.original_title}</h2>
-                                                <p>{movie.overview}</p>
-                                            </div>
-                                        </div>
+                    popular.slice(1, 5).map((movie: Movie) => (
+                        <div key={movie.id} className='column'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <figure className='image'>
+                                        <img src={baseUrl + movie.poster_path} alt='Movie Poster' />
+                                    </figure>
+                                </div>
+                                <div className='card-content'>
+                                    <div className='content'>
+                                        <h2>{movie.original_title}</h2>
+                                        <p>{movie.overview}</p>
                                     </div>
                                 </div>
-                            ),
-                        )}
+                            </div>
+                        </div>
+                    ))}
             </div>
         </section>
     );

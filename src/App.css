@@ -1,5 +1,6 @@
 @import '~bulma/css/bulma.min.css';
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~bulma-pageloader/dist/css/bulma-pageloader.min.css';
 
 .hero.is-fixed-top {
     left: 0;

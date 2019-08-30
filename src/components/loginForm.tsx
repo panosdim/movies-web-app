@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { LoginInfo, User } from '../model';
 import { useGlobal } from 'reactn';
-// @ts-ignore
-import { toast } from 'bulma-toast';
+const Notification = require('bulma-toast');
 
 export const LoginForm: React.FC = () => {
     const [isLoading, setLoading] = useState(false);
@@ -16,7 +15,7 @@ export const LoginForm: React.FC = () => {
 
     React.useEffect(() => {
         if (isLoggedIn) {
-            toast({
+            Notification.toast({
                 message: `Welcome ${user.firstName} ${user.lastName}`,
                 type: 'is-success',
                 position: 'bottom-center',
@@ -74,8 +73,8 @@ export const LoginForm: React.FC = () => {
                 setLoggedIn(true);
             })
             .catch(() => {
-                toast({
-                    message: 'Login Failed. Please check your email and password.',
+                Notification.toast({
+                    message: 'Login failed. Please check your email and password.',
                     type: 'is-danger',
                     position: 'bottom-center',
                     dismissible: false,
@@ -124,7 +123,10 @@ export const LoginForm: React.FC = () => {
                     <div className='field'>
                         <div className='control'>
                             <button className={isLoading ? 'button is-link is-loading' : 'button is-link'}>
-                                Login
+                                <span className='icon'>
+                                    <i className='fas fa-sign-in-alt'></i>
+                                </span>
+                                <span>Login</span>
                             </button>
                         </div>
                     </div>

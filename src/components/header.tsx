@@ -28,7 +28,10 @@ export const Header: React.FC = () => {
                                             <div className='field-body'>
                                                 <div className='control'>
                                                     <button onClick={logout} className='button is-danger'>
-                                                        Logout
+                                                        <span className='icon'>
+                                                            <i className='fas fa-sign-out-alt'></i>
+                                                        </span>
+                                                        <span>Logout</span>
                                                     </button>
                                                 </div>
                                             </div>

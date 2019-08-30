@@ -1,13 +1,14 @@
 import React from 'react';
-import { Header, Footer } from '../components';
+import { Header, Footer, MoviesList, Search } from '../components';
 
 export const Main: React.FC = () => {
     return (
         <>
             <Header />
-            <div>
-                <p>Main</p>>
-            </div>
+            <section className='section is-with-fixed-navbar'>
+                <Search />
+                <MoviesList />
+            </section>
             <Footer />
         </>
     );

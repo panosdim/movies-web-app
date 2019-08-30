@@ -1,4 +1,4 @@
-export type Movie = {
+export type MovieType = {
     poster_path: string | null;
     adult: boolean;
     overview: string;
@@ -29,3 +29,9 @@ export type UserType = {
 export interface User {
     user: UserType;
 }
+
+export interface SearchingInfo {
+    isInSearch: boolean;
+}
+
+export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';

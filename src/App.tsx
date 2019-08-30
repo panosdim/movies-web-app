@@ -12,6 +12,7 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getIte
 
 setGlobal({
     isLoggedIn: false,
+    isInSearch: false,
     user: {},
     movies: [],
 });

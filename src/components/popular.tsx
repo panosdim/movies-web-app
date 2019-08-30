@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Movie } from '../model';
+import { MovieType, IMAGE_BASE_URL } from '../model';
 
 export const Popular: React.FC = () => {
     const [popular, setPopular] = useState();
-    const baseUrl = 'https://image.tmdb.org/t/p/w342';
+    const baseUrl = IMAGE_BASE_URL + 'w342';
 
     React.useEffect(() => {
         axios.get('popular').then(response => {
@@ -21,7 +21,7 @@ export const Popular: React.FC = () => {
             </div>
             <div className='columns'>
                 {popular &&
-                    popular.slice(1, 5).map((movie: Movie) => (
+                    popular.slice(1, 5).map((movie: MovieType) => (
                         <div key={movie.id} className='column'>
                             <div className='card'>
                                 <div className='card-image'>

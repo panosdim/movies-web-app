@@ -15,9 +15,14 @@ export type MovieType = {
     vote_average: number;
 };
 
-export interface LoginInfo {
-    isLoggedIn: boolean;
-}
+export type MovieResultType = {
+    id: number;
+    image: string | null;
+    movie_id: number;
+    overview: string;
+    release_date: string;
+    title: string;
+};
 
 export type UserType = {
     id: number;
@@ -26,12 +31,20 @@ export type UserType = {
     lastName: string;
 };
 
-export interface User {
+export interface ILoginInfo {
+    isLoggedIn: boolean;
+}
+
+export interface IUser {
     user: UserType;
 }
 
-export interface SearchingInfo {
+export interface ISearchingInfo {
     isInSearch: boolean;
+}
+
+export interface IMoviesList {
+    movies: MovieResultType[];
 }
 
 export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';

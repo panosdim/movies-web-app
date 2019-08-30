@@ -1,10 +1,10 @@
 import React from 'react';
 import { useGlobal } from 'reactn';
-import { LoginInfo } from '../model';
+import { ILoginInfo } from '../model';
 import { LoginForm } from '.';
 
 export const Header: React.FC = () => {
-    const [isLoggedIn, setLoggedIn] = useGlobal<LoginInfo>('isLoggedIn');
+    const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
 
     const logout = () => {
         localStorage.removeItem('token');

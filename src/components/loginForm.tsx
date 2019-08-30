@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { LoginInfo, User } from '../model';
+import { ILoginInfo, IUser } from '../model';
 import { useGlobal } from 'reactn';
 const Notification = require('bulma-toast');
 
 export const LoginForm: React.FC = () => {
     const [isLoading, setLoading] = useState(false);
     const loginFormRef = useRef<HTMLFormElement>(null);
-    const [user, setUser] = useGlobal<User>('user');
-    const [isLoggedIn, setLoggedIn] = useGlobal<LoginInfo>('isLoggedIn');
+    const [user, setUser] = useGlobal<IUser>('user');
+    const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
     const [values, setValues] = useState<FormData>({});
 
     type FormData = { [key: string]: string };

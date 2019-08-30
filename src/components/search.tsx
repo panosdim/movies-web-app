@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useGlobal } from 'reactn';
-import { SearchingInfo, MovieType, IMAGE_BASE_URL, LoginInfo } from '../model';
+import { ISearchingInfo, MovieType, IMAGE_BASE_URL, ILoginInfo } from '../model';
 import axios, { Canceler } from 'axios';
 const Notification = require('bulma-toast');
 const autoComplete = require('pixabay-javascript-autocomplete');
@@ -8,9 +8,9 @@ const autoComplete = require('pixabay-javascript-autocomplete');
 export const Search: React.FC = () => {
     const [isSearching, setSearching] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [isInSearch, setInSearch] = useGlobal<SearchingInfo>('isInSearch');
+    const [isInSearch, setInSearch] = useGlobal<ISearchingInfo>('isInSearch');
     const [results, setResults] = useState<MovieType[]>([]);
-    const [, setLoggedIn] = useGlobal<LoginInfo>('isLoggedIn');
+    const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
     const searchRef = useRef<HTMLInputElement>(null);
 
     const baseUrl = IMAGE_BASE_URL + 'w92';

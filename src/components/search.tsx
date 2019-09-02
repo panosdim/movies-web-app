@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useGlobal } from 'reactn';
-import { ISearchingInfo, MovieType, IMAGE_BASE_URL, ILoginInfo } from '../model';
-import axios, { Canceler } from 'axios';
+import { ISearchingInfo, MovieType, IMAGE_BASE_URL, ILoginInfo, IMoviesList, MovieResultType } from '../model';
+import axios, { Canceler, AxiosResponse } from 'axios';
 const Notification = require('bulma-toast');
 const autoComplete = require('pixabay-javascript-autocomplete');
 
@@ -12,6 +12,7 @@ export const Search: React.FC = () => {
     const [results, setResults] = useState<MovieType[]>([]);
     const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
     const searchRef = useRef<HTMLInputElement>(null);
+    const [movies, setMovies] = useGlobal<IMoviesList>('movies');
 
     const baseUrl = IMAGE_BASE_URL + 'w92';
     const CancelToken = axios.CancelToken;
@@ -176,7 +177,7 @@ export const Search: React.FC = () => {
     };
 
     const addMovie = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, movie: MovieType) => {
-        const button = event.target as HTMLButtonElement;
+        const button = event.currentTarget as HTMLButtonElement;
         button.classList.add('is-loading');
 
         const data = {
@@ -188,8 +189,9 @@ export const Search: React.FC = () => {
 
         axios
             .post('movies', data)
-            .then(() => {
+            .then((response: AxiosResponse<MovieResultType>) => {
                 button.classList.remove('is-loading');
+                setMovies([...movies, response.data]);
                 clear();
             })
             .catch(error => {
@@ -281,6 +283,7 @@ export const Search: React.FC = () => {
                                                   <button
                                                       className='button is-success'
                                                       onClick={e => addMovie(e, movie)}
+                                                      disabled={movies.some(item => item.movie_id === movie.id)}
                                                   >
                                                       Add to watchlist
                                                   </button>

@@ -6,8 +6,8 @@ import { useGlobal, setGlobal } from 'reactn';
 import { IUser, ILoginInfo } from './model';
 
 // TODO: Change to production
-axios.defaults.baseURL = 'http://localhost:8000/';
-// axios.defaults.baseURL = 'https://api.flat.cc.nf/';
+// axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = 'https://api.movies.cc.nf/';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 setGlobal({

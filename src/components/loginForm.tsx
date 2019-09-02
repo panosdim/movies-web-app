@@ -18,7 +18,7 @@ export const LoginForm: React.FC = () => {
             Notification.toast({
                 message: `Welcome ${user.firstName} ${user.lastName}`,
                 type: 'is-success',
-                position: 'bottom-center',
+                position: 'bottom-right',
                 dismissible: false,
                 pauseOnHover: true,
             });
@@ -76,7 +76,7 @@ export const LoginForm: React.FC = () => {
                 Notification.toast({
                     message: 'Login failed. Please check your email and password.',
                     type: 'is-danger',
-                    position: 'bottom-center',
+                    position: 'bottom-right',
                     dismissible: false,
                     pauseOnHover: true,
                 });

@@ -47,7 +47,7 @@ export const Search: React.FC = () => {
                                 Notification.toast({
                                     message: error.response.data.error,
                                     type: 'is-danger',
-                                    position: 'bottom-center',
+                                    position: 'bottom-right',
                                     dismissible: false,
                                     pauseOnHover: true,
                                 });
@@ -146,7 +146,7 @@ export const Search: React.FC = () => {
                         Notification.toast({
                             message: error.response.data.error,
                             type: 'is-danger',
-                            position: 'bottom-center',
+                            position: 'bottom-right',
                             dismissible: false,
                             pauseOnHover: true,
                         });
@@ -154,7 +154,7 @@ export const Search: React.FC = () => {
                         Notification.toast({
                             message: 'Search failed. Please try again.',
                             type: 'is-danger',
-                            position: 'bottom-center',
+                            position: 'bottom-right',
                             dismissible: false,
                             pauseOnHover: true,
                         });
@@ -201,7 +201,7 @@ export const Search: React.FC = () => {
                     Notification.toast({
                         message: error.response.data.error,
                         type: 'is-danger',
-                        position: 'bottom-center',
+                        position: 'bottom-right',
                         dismissible: false,
                         pauseOnHover: true,
                     });
@@ -209,7 +209,7 @@ export const Search: React.FC = () => {
                     Notification.toast({
                         message: 'Adding movie to watch list failed. Please try again.',
                         type: 'is-danger',
-                        position: 'bottom-center',
+                        position: 'bottom-right',
                         dismissible: false,
                         pauseOnHover: true,
                     });

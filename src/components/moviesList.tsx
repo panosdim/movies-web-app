@@ -19,6 +19,23 @@ export const MoviesList: React.FC = () => {
         axios.get('movies').then(response => {
             setMovies(response.data);
         });
+
+        Notification.toast({
+            message: `Checking for release updates...`,
+            type: 'is-success',
+            position: 'bottom-right',
+            dismissible: false,
+            pauseOnHover: true,
+        });
+
+        axios
+            .get('update')
+            .then(() => {
+                axios.get('movies').then(response => {
+                    setMovies(response.data);
+                });
+            })
+            .catch(() => {});
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -53,7 +70,7 @@ export const MoviesList: React.FC = () => {
                     Notification.toast({
                         message: error.response.data.error,
                         type: 'is-danger',
-                        position: 'bottom-center',
+                        position: 'bottom-right',
                         dismissible: false,
                         pauseOnHover: true,
                     });
@@ -61,7 +78,7 @@ export const MoviesList: React.FC = () => {
                     Notification.toast({
                         message: 'Delete movie from watch list failed. Please try again.',
                         type: 'is-danger',
-                        position: 'bottom-center',
+                        position: 'bottom-right',
                         dismissible: false,
                         pauseOnHover: true,
                     });

@@ -85,53 +85,55 @@ export const LoginForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={login} noValidate ref={loginFormRef}>
-            <div className='field is-horizontal is-pulled-right'>
-                <div className='field-body'>
-                    <div className='field'>
-                        <div className='control is-expanded has-icons-left'>
-                            <input
-                                onChange={handleChange}
-                                className='input'
-                                name='email'
-                                type='email'
-                                placeholder='Email'
-                                value={values.email || ''}
-                                required
-                            />
-                            <span className='icon is-small is-left'>
-                                <i className='fa fa-envelope'></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div className='field'>
-                        <div className='control is-expanded has-icons-left'>
-                            <input
-                                onChange={handleChange}
-                                className='input'
-                                name='password'
-                                type='password'
-                                placeholder='Password'
-                                value={values.password || ''}
-                                required
-                            />
-                            <span className='icon is-small is-left'>
-                                <i className='fa fa-lock'></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div className='field'>
-                        <div className='control'>
-                            <button className={isLoading ? 'button is-link is-loading' : 'button is-link'}>
-                                <span className='icon'>
-                                    <i className='fas fa-sign-in-alt'></i>
+        <div className='column'>
+            <form onSubmit={login} noValidate ref={loginFormRef}>
+                <div className='field is-horizontal is-pulled-right'>
+                    <div className='field-body'>
+                        <div className='field'>
+                            <div className='control is-expanded has-icons-left'>
+                                <input
+                                    onChange={handleChange}
+                                    className='input'
+                                    name='email'
+                                    type='email'
+                                    placeholder='Email'
+                                    value={values.email || ''}
+                                    required
+                                />
+                                <span className='icon is-small is-left'>
+                                    <i className='fa fa-envelope'></i>
                                 </span>
-                                <span>Login</span>
-                            </button>
+                            </div>
+                        </div>
+                        <div className='field'>
+                            <div className='control is-expanded has-icons-left'>
+                                <input
+                                    onChange={handleChange}
+                                    className='input'
+                                    name='password'
+                                    type='password'
+                                    placeholder='Password'
+                                    value={values.password || ''}
+                                    required
+                                />
+                                <span className='icon is-small is-left'>
+                                    <i className='fa fa-lock'></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div className='field'>
+                            <div className='control'>
+                                <button className={isLoading ? 'button is-link is-loading' : 'button is-link'}>
+                                    <span className='icon'>
+                                        <i className='fas fa-sign-in-alt'></i>
+                                    </span>
+                                    <span>Login</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 };

@@ -15,6 +15,7 @@ setGlobal({
     isInSearch: false,
     user: {},
     movies: [],
+    results: [],
 });
 
 const App: React.FC = () => {

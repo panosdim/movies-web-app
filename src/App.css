@@ -42,3 +42,8 @@ div.card {
 header.card-header {
     flex-grow: 1;
 }
+
+.sticky {
+    position: fixed;
+    z-index: 100;
+}

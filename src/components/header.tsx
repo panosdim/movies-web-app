@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGlobal } from 'reactn';
 import { ILoginInfo } from '../model';
-import { LoginForm } from '.';
+import { LoginForm, Search } from '.';
 
 export const Header: React.FC = () => {
     const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
@@ -21,9 +21,10 @@ export const Header: React.FC = () => {
                                 <h1 className='title'>Movies Watchlist</h1>
                                 <h2 className='subtitle'>DVD release dates of movies</h2>
                             </div>
-                            <div className='column'>
-                                {isLoggedIn ? (
-                                    <div className='column'>
+                            {isLoggedIn ? (
+                                <>
+                                    <Search />
+                                    <div className='column is-one-quarter'>
                                         <div className='field is-horizontal is-pulled-right'>
                                             <div className='field-body'>
                                                 <div className='control'>
@@ -37,10 +38,10 @@ export const Header: React.FC = () => {
                                             </div>
                                         </div>
                                     </div>
-                                ) : (
-                                    <LoginForm />
-                                )}
-                            </div>
+                                </>
+                            ) : (
+                                <LoginForm />
+                            )}
                         </div>
                     </div>
                 </div>

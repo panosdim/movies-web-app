@@ -43,6 +43,10 @@ export interface ISearchingInfo {
     isInSearch: boolean;
 }
 
+export interface ISearchingResults {
+    results: MovieType[];
+}
+
 export interface IMoviesList {
     movies: MovieResultType[];
 }

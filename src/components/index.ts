@@ -4,3 +4,4 @@ export * from './loginForm';
 export * from './moviesList';
 export * from './popular';
 export * from './search';
+export * from './searchResults';

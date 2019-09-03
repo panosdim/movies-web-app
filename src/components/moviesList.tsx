@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useGlobal } from 'reactn';
 import { IMoviesList, IMAGE_BASE_URL, MovieResultType, ILoginInfo } from '../model';
 import axios from 'axios';
+import { now, formatReleaseDate } from '.';
 const Notification = require('bulma-toast');
 
 export const MoviesList: React.FC = () => {
@@ -12,19 +13,10 @@ export const MoviesList: React.FC = () => {
     const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
 
     const baseUrl = IMAGE_BASE_URL + 'w185';
-    const now: string = new Date().toISOString().slice(0, 10);
 
     React.useEffect(() => {
         axios.get('movies').then(response => {
             setMovies(response.data);
-        });
-
-        Notification.toast({
-            message: `Checking for release updates...`,
-            type: 'is-success',
-            position: 'bottom-right',
-            dismissible: false,
-            pauseOnHover: true,
         });
 
         axios
@@ -32,6 +24,13 @@ export const MoviesList: React.FC = () => {
             .then(() => {
                 axios.get('movies').then(response => {
                     setMovies(response.data);
+                    Notification.toast({
+                        message: `Release dates have been updated.`,
+                        type: 'is-success',
+                        position: 'bottom-right',
+                        dismissible: false,
+                        pauseOnHover: true,
+                    });
                 });
             })
             .catch(() => {});
@@ -120,7 +119,9 @@ export const MoviesList: React.FC = () => {
                                         </header>
                                         <div className='card-content'>
                                             <div className='has-text-centered'>
-                                                <span className='tag is-success is-large'>{movie.release_date}</span>
+                                                <span className='tag is-success is-large'>
+                                                    {formatReleaseDate(movie.release_date)}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +160,9 @@ export const MoviesList: React.FC = () => {
                                         </header>
                                         <div className='card-content'>
                                             <div className='has-text-centered'>
-                                                <span className='tag is-warning is-large'>{movie.release_date}</span>
+                                                <span className='tag is-warning is-large'>
+                                                    {formatReleaseDate(movie.release_date)}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

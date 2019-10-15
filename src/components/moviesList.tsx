@@ -40,7 +40,7 @@ export const MoviesList: React.FC = () => {
     React.useEffect(() => {
         const temp = movies.filter((movie: MovieResultType) => movie.release_date !== null);
 
-        const releasedMovies = temp.filter((movie: MovieResultType) => movie.release_date < now);
+        const releasedMovies = temp.filter((movie: MovieResultType) => movie.release_date <= now);
         setReleased(releasedMovies);
 
         const comingMovies = temp.filter((movie: MovieResultType) => movie.release_date > now);

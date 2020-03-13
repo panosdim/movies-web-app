@@ -111,10 +111,9 @@ export const Search: React.FC = () => {
                 setSearching(true);
                 setResults([]);
                 setInSearch(true);
-                return false;
+                event.preventDefault();
             }
         }
-        return true;
     };
 
     const handleSearch = () => {

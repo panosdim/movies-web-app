@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import { ILoginInfo, IUser } from '../model';
+import axios, { AxiosResponse } from 'axios';
+import * as bulmaToast from 'bulma-toast';
+import React, { useRef, useState } from 'react';
 import { useGlobal } from 'reactn';
-const Notification = require('bulma-toast');
+import { ILoginInfo, IUser } from '../model';
 
 export const LoginForm: React.FC = () => {
     const [isLoading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ export const LoginForm: React.FC = () => {
 
     React.useEffect(() => {
         if (isLoggedIn) {
-            Notification.toast({
+            bulmaToast.toast({
                 message: `Welcome ${user.firstName} ${user.lastName}`,
                 type: 'is-success',
                 position: 'bottom-right',
@@ -29,7 +29,7 @@ export const LoginForm: React.FC = () => {
         let form = loginFormRef.current as HTMLFormElement;
 
         if (form && !form.checkValidity()) {
-            form.querySelectorAll(':invalid').forEach(element => {
+            form.querySelectorAll(':invalid').forEach((element) => {
                 const el = element as HTMLInputElement;
                 if (!el.validity.valid) {
                     el.classList.add('is-danger');
@@ -47,7 +47,7 @@ export const LoginForm: React.FC = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.persist();
         const el = event.target;
-        setValues(values => ({ ...values, [el.name]: el.value }));
+        setValues((values) => ({ ...values, [el.name]: el.value }));
         if (!el.validity.valid) {
             el.classList.add('is-danger');
         } else {
@@ -65,7 +65,7 @@ export const LoginForm: React.FC = () => {
 
         axios
             .post('login', values)
-            .then(response => {
+            .then((response: AxiosResponse<IUser>) => {
                 localStorage.setItem('token', response.data.token);
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
                 setLoading(false);
@@ -73,7 +73,7 @@ export const LoginForm: React.FC = () => {
                 setLoggedIn(true);
             })
             .catch(() => {
-                Notification.toast({
+                bulmaToast.toast({
                     message: 'Login failed. Please check your email and password.',
                     type: 'is-danger',
                     position: 'bottom-right',

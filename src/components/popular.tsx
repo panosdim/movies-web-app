@@ -1,13 +1,13 @@
+import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
-import axios from 'axios';
-import { MovieType, IMAGE_BASE_URL } from '../model';
+import { IMAGE_BASE_URL, MovieType } from '../model';
 
 export const Popular: React.FC = () => {
-    const [popular, setPopular] = useState();
+    const [popular, setPopular] = useState<MovieType[]>([]);
     const baseUrl = IMAGE_BASE_URL + 'w342';
 
     React.useEffect(() => {
-        axios.get('popular').then(response => {
+        axios.get('popular').then((response: AxiosResponse) => {
             setPopular(response.data.results);
         });
     }, []);

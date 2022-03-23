@@ -1,9 +1,9 @@
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import * as bulmaToast from 'bulma-toast';
 import React, { useState } from 'react';
 import { useGlobal } from 'reactn';
-import { IMoviesList, IMAGE_BASE_URL, MovieResultType, ILoginInfo } from '../model';
-import axios from 'axios';
-import { now, formatReleaseDate } from '.';
-const Notification = require('bulma-toast');
+import { formatReleaseDate, now } from '.';
+import { ILoginInfo, IMAGE_BASE_URL, IMoviesList, MovieResultType } from '../model';
 
 export const MoviesList: React.FC = () => {
     const [movies, setMovies] = useGlobal<IMoviesList>('movies');
@@ -15,16 +15,16 @@ export const MoviesList: React.FC = () => {
     const baseUrl = IMAGE_BASE_URL + 'w185';
 
     React.useEffect(() => {
-        axios.get('movies').then(response => {
+        axios.get('movies').then((response: AxiosResponse<IMoviesList>) => {
             setMovies(response.data);
         });
 
         axios
             .get('update')
             .then(() => {
-                axios.get('movies').then(response => {
+                axios.get('movies').then((response: AxiosResponse<IMoviesList>) => {
                     setMovies(response.data);
-                    Notification.toast({
+                    bulmaToast.toast({
                         message: `Release dates have been updated.`,
                         type: 'is-success',
                         position: 'bottom-right',
@@ -59,13 +59,13 @@ export const MoviesList: React.FC = () => {
             .delete(`movies/${movie.id}`)
             .then(() => {
                 button.classList.remove('disabled');
-                setMovies(movies.filter(item => item.id !== movie.id));
+                setMovies(movies.filter((item) => item.id !== movie.id));
             })
-            .catch(error => {
+            .catch((error: AxiosError) => {
                 if (error.response && error.response.status === 400) {
                     // JWT Token expired
                     setLoggedIn(false);
-                    Notification.toast({
+                    bulmaToast.toast({
                         message: error.response.data.error,
                         type: 'is-danger',
                         position: 'bottom-right',
@@ -73,7 +73,7 @@ export const MoviesList: React.FC = () => {
                         pauseOnHover: true,
                     });
                 } else {
-                    Notification.toast({
+                    bulmaToast.toast({
                         message: 'Delete movie from watch list failed. Please try again.',
                         type: 'is-danger',
                         position: 'bottom-right',
@@ -110,7 +110,7 @@ export const MoviesList: React.FC = () => {
                                             <p className='card-header-title'>{movie.title}</p>
                                             <button
                                                 className='card-header-icon link-button'
-                                                onClick={e => deleteMovie(e, movie)}
+                                                onClick={(e) => deleteMovie(e, movie)}
                                             >
                                                 <span className='icon has-text-danger'>
                                                     <i className='fas fa-trash' aria-hidden='true'></i>
@@ -151,7 +151,7 @@ export const MoviesList: React.FC = () => {
                                             <p className='card-header-title'>{movie.title}</p>
                                             <button
                                                 className='card-header-icon link-button'
-                                                onClick={e => deleteMovie(e, movie)}
+                                                onClick={(e) => deleteMovie(e, movie)}
                                             >
                                                 <span className='icon has-text-danger'>
                                                     <i className='fas fa-trash' aria-hidden='true'></i>
@@ -192,7 +192,7 @@ export const MoviesList: React.FC = () => {
                                             <p className='card-header-title'>{movie.title}</p>
                                             <button
                                                 className='card-header-icon link-button'
-                                                onClick={e => deleteMovie(e, movie)}
+                                                onClick={(e) => deleteMovie(e, movie)}
                                             >
                                                 <span className='icon has-text-danger'>
                                                     <i className='fas fa-trash' aria-hidden='true'></i>

@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import axios, { AxiosError, AxiosResponse, Canceler } from 'axios';
+import * as bulmaToast from 'bulma-toast';
+import React, { useRef, useState } from 'react';
 import { useGlobal } from 'reactn';
-import { ISearchingInfo, ILoginInfo, ISearchingResults } from '../model';
-import axios, { Canceler } from 'axios';
-const Notification = require('bulma-toast');
+import { ILoginInfo, ISearchingInfo, ISearchingResults } from '../model';
 const autoComplete = require('pixabay-javascript-autocomplete');
 
 export const Search: React.FC = () => {
@@ -29,20 +29,20 @@ export const Search: React.FC = () => {
                             'autocomplete',
                             { term: term },
                             {
-                                cancelToken: new CancelToken(function executor(c) {
+                                cancelToken: new CancelToken(function executor(c: Canceler) {
                                     cancelRef.current = c;
                                 }),
                             },
                         )
-                        .then(results => {
+                        .then((results: AxiosResponse) => {
                             response(results.data);
                         })
-                        .catch(error => {
+                        .catch((error: AxiosError) => {
                             if (error.response && error.response.status === 400) {
                                 // JWT Token expired
                                 setSearching(false);
                                 setLoggedIn(false);
-                                Notification.toast({
+                                bulmaToast.toast({
                                     message: error.response.data.error,
                                     type: 'is-danger',
                                     position: 'bottom-right',
@@ -134,19 +134,19 @@ export const Search: React.FC = () => {
             }
             axios
                 .post('search', { term: searchTerm })
-                .then(response => {
+                .then((response: AxiosResponse) => {
                     setSearching(false);
                     setResults(response.data.results);
                     if (cancelRef.current !== undefined) {
                         cancelRef.current();
                     }
                 })
-                .catch(error => {
+                .catch((error: AxiosError) => {
                     if (error.response && error.response.status === 400) {
                         // JWT Token expired
                         setSearching(false);
                         setLoggedIn(false);
-                        Notification.toast({
+                        bulmaToast.toast({
                             message: error.response.data.error,
                             type: 'is-danger',
                             position: 'bottom-right',
@@ -154,7 +154,7 @@ export const Search: React.FC = () => {
                             pauseOnHover: true,
                         });
                     } else {
-                        Notification.toast({
+                        bulmaToast.toast({
                             message: 'Search failed. Please try again.',
                             type: 'is-danger',
                             position: 'bottom-right',

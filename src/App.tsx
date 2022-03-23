@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { setGlobal, useGlobal } from 'reactn';
 import './App.css';
@@ -7,7 +7,7 @@ import { Login, Main } from './pages';
 
 // TODO: Change to production
 // axios.defaults.baseURL = 'http://localhost:8000/';
-axios.defaults.baseURL = 'https://api-movies.sites.freeddns.org:9006';
+axios.defaults.baseURL = 'https://api.movies.cc.nf/';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 setGlobal({
@@ -26,7 +26,7 @@ const App: React.FC = () => {
     React.useEffect(() => {
         axios
             .get('user')
-            .then((response) => {
+            .then((response: AxiosResponse<IUser>) => {
                 setLoggedIn(true);
                 setLoading(false);
                 setUser(response.data);

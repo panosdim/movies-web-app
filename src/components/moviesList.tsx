@@ -15,14 +15,14 @@ export const MoviesList: React.FC = () => {
     const baseUrl = IMAGE_BASE_URL + 'w185';
 
     React.useEffect(() => {
-        axios.get('movies').then((response: AxiosResponse<IMoviesList>) => {
+        axios.get('movies').then((response: AxiosResponse) => {
             setMovies(response.data);
         });
 
         axios
             .get('update')
             .then(() => {
-                axios.get('movies').then((response: AxiosResponse<IMoviesList>) => {
+                axios.get('movies').then((response: AxiosResponse) => {
                     setMovies(response.data);
                     bulmaToast.toast({
                         message: `Release dates have been updated.`,

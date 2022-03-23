@@ -65,7 +65,7 @@ export const LoginForm: React.FC = () => {
 
         axios
             .post('login', values)
-            .then((response: AxiosResponse<IUser>) => {
+            .then((response: AxiosResponse) => {
                 localStorage.setItem('token', response.data.token);
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
                 setLoading(false);

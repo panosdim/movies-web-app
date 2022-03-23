@@ -26,7 +26,7 @@ const App: React.FC = () => {
     React.useEffect(() => {
         axios
             .get('user')
-            .then((response: AxiosResponse<IUser>) => {
+            .then((response: AxiosResponse) => {
                 setLoggedIn(true);
                 setLoading(false);
                 setUser(response.data);

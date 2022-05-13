@@ -1,10 +1,10 @@
 import React from 'react';
-import { useGlobal } from 'reactn';
-import { ILoginInfo } from '../model';
+import { useRecoilState } from 'recoil';
 import { LoginForm, Search } from '.';
+import { loginState } from '../model';
 
 export const Header: React.FC = () => {
-    const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
+    const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
 
     const logout = () => {
         localStorage.removeItem('token');

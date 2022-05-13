@@ -1,16 +1,16 @@
 import axios, { AxiosError, AxiosResponse, Canceler } from 'axios';
 import * as bulmaToast from 'bulma-toast';
 import React, { useRef, useState } from 'react';
-import { useGlobal } from 'reactn';
-import { ILoginInfo, ISearchingInfo, ISearchingResults } from '../model';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { AxiosResponseError, loginState, searchResultsState, searchState } from '../model';
 const autoComplete = require('pixabay-javascript-autocomplete');
 
 export const Search: React.FC = () => {
     const [isSearching, setSearching] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [isInSearch, setInSearch] = useGlobal<ISearchingInfo>('isInSearch');
-    const [, setResults] = useGlobal<ISearchingResults>('results');
-    const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
+    const setLoggedIn = useSetRecoilState(loginState);
+    const setResults = useSetRecoilState(searchResultsState);
+    const [isInSearch, setInSearch] = useRecoilState(searchState);
     const searchRef = useRef<HTMLInputElement>(null);
 
     const CancelToken = axios.CancelToken;
@@ -37,7 +37,7 @@ export const Search: React.FC = () => {
                         .then((results: AxiosResponse) => {
                             response(results.data);
                         })
-                        .catch((error: AxiosError) => {
+                        .catch((error: AxiosError<AxiosResponseError>) => {
                             if (error.response && error.response.status === 400) {
                                 // JWT Token expired
                                 setSearching(false);
@@ -141,7 +141,7 @@ export const Search: React.FC = () => {
                         cancelRef.current();
                     }
                 })
-                .catch((error: AxiosError) => {
+                .catch((error: AxiosError<AxiosResponseError>) => {
                     if (error.response && error.response.status === 400) {
                         // JWT Token expired
                         setSearching(false);

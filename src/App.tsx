@@ -1,26 +1,18 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
-import { setGlobal, useGlobal } from 'reactn';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import './App.css';
-import { ILoginInfo, IUser } from './model';
+import { loginState, userState } from './model';
 import { Login, Main } from './pages';
 
 // TODO: Change to production
-// axios.defaults.baseURL = 'http://localhost:8000/';
-axios.defaults.baseURL = 'https://api.movies.cc.nf/';
+// axios.defaults.baseURL = 'http://localhost:8001/api/';
+axios.defaults.baseURL = 'https://movies.dsw.mywire.org/api';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
-setGlobal({
-    isLoggedIn: false,
-    isInSearch: false,
-    user: {},
-    movies: [],
-    results: [],
-});
-
 const App: React.FC = () => {
-    const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
-    const [, setUser] = useGlobal<IUser>('user');
+    const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
+    const setUser = useSetRecoilState(userState);
     const [isLoading, setLoading] = useState(true);
 
     React.useEffect(() => {

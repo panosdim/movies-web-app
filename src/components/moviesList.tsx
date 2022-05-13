@@ -1,16 +1,16 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as bulmaToast from 'bulma-toast';
 import React, { useState } from 'react';
-import { useGlobal } from 'reactn';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { formatReleaseDate, now } from '.';
-import { ILoginInfo, IMAGE_BASE_URL, IMoviesList, MovieResultType } from '../model';
+import { AxiosResponseError, IMAGE_BASE_URL, loginState, MovieResultType, moviesState } from '../model';
 
 export const MoviesList: React.FC = () => {
-    const [movies, setMovies] = useGlobal<IMoviesList>('movies');
     const [released, setReleased] = useState<MovieResultType[]>([]);
     const [coming, setComing] = useState<MovieResultType[]>([]);
     const [unknown, setUnknown] = useState<MovieResultType[]>([]);
-    const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
+    const setLoggedIn = useSetRecoilState(loginState);
+    const [movies, setMovies] = useRecoilState(moviesState);
 
     const baseUrl = IMAGE_BASE_URL + 'w185';
 
@@ -61,7 +61,7 @@ export const MoviesList: React.FC = () => {
                 button.classList.remove('disabled');
                 setMovies(movies.filter((item) => item.id !== movie.id));
             })
-            .catch((error: AxiosError) => {
+            .catch((error: AxiosError<AxiosResponseError>) => {
                 if (error.response && error.response.status === 400) {
                     // JWT Token expired
                     setLoggedIn(false);

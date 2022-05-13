@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header, Footer, MoviesList, SearchResults } from '../components';
-import { useGlobal } from 'reactn';
-import { ISearchingInfo } from '../model';
+import { useRecoilValue } from 'recoil';
+import { Footer, Header, MoviesList, SearchResults } from '../components';
+import { searchState } from '../model';
 
 export const Main: React.FC = () => {
-    const [isInSearch] = useGlobal<ISearchingInfo>('isInSearch');
+    const isInSearch = useRecoilValue(searchState);
 
     return (
         <>

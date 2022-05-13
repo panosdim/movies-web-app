@@ -1,22 +1,23 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as bulmaToast from 'bulma-toast';
 import React from 'react';
-import { useGlobal } from 'reactn';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-    ILoginInfo,
+    AxiosResponseError,
     IMAGE_BASE_URL,
-    IMoviesList,
-    ISearchingInfo,
-    ISearchingResults,
+    loginState,
     MovieResultType,
+    moviesState,
     MovieType,
+    searchResultsState,
+    searchState,
 } from '../model';
 
 export const SearchResults: React.FC = () => {
-    const [, setInSearch] = useGlobal<ISearchingInfo>('isInSearch');
-    const [movies, setMovies] = useGlobal<IMoviesList>('movies');
-    const [, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
-    const [results] = useGlobal<ISearchingResults>('results');
+    const setInSearch = useSetRecoilState(searchState);
+    const [movies, setMovies] = useRecoilState(moviesState);
+    const setLoggedIn = useSetRecoilState(loginState);
+    const results = useRecoilValue(searchResultsState);
 
     const baseUrl = IMAGE_BASE_URL + 'w92';
 
@@ -38,7 +39,7 @@ export const SearchResults: React.FC = () => {
                 setMovies([...movies, response.data]);
                 clear();
             })
-            .catch((error: AxiosError) => {
+            .catch((error: AxiosError<AxiosResponseError>) => {
                 if (error.response && error.response.status === 400) {
                     // JWT Token expired
                     setLoggedIn(false);

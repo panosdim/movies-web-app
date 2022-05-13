@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 import * as bulmaToast from 'bulma-toast';
 import React, { useRef, useState } from 'react';
-import { useGlobal } from 'reactn';
-import { ILoginInfo, IUser } from '../model';
+import { useRecoilState } from 'recoil';
+import { loginState, userState } from '../model';
 
 export const LoginForm: React.FC = () => {
     const [isLoading, setLoading] = useState(false);
     const loginFormRef = useRef<HTMLFormElement>(null);
-    const [user, setUser] = useGlobal<IUser>('user');
-    const [isLoggedIn, setLoggedIn] = useGlobal<ILoginInfo>('isLoggedIn');
+    const [user, setUser] = useRecoilState(userState);
+    const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
     const [values, setValues] = useState<FormData>({});
 
     type FormData = { [key: string]: string };

@@ -31,7 +31,7 @@ export const Popular: React.FC = () => {
                                 </div>
                                 <div className='card-content'>
                                     <div className='content'>
-                                        <h2>{movie.original_title}</h2>
+                                        <h2>{movie.title ?? movie.name}</h2>
                                         <p>{movie.overview}</p>
                                     </div>
                                 </div>

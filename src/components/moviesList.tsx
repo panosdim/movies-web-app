@@ -107,7 +107,7 @@ export const MoviesList: React.FC = () => {
                                             </figure>
                                         </div>
                                         <header className='card-header'>
-                                            <p className='card-header-title'>{movie.title}</p>
+                                            <p className='card-header-title'>{movie.title ?? movie.name}</p>
                                             <button
                                                 className='card-header-icon link-button'
                                                 onClick={(e) => deleteMovie(e, movie)}
@@ -148,7 +148,7 @@ export const MoviesList: React.FC = () => {
                                             </figure>
                                         </div>
                                         <header className='card-header'>
-                                            <p className='card-header-title'>{movie.title}</p>
+                                            <p className='card-header-title'>{movie.title ??  movie.name}</p>
                                             <button
                                                 className='card-header-icon link-button'
                                                 onClick={(e) => deleteMovie(e, movie)}
@@ -189,7 +189,7 @@ export const MoviesList: React.FC = () => {
                                             </figure>
                                         </div>
                                         <header className='card-header'>
-                                            <p className='card-header-title'>{movie.title}</p>
+                                            <p className='card-header-title'>{movie.title ?? movie.name}</p>
                                             <button
                                                 className='card-header-icon link-button'
                                                 onClick={(e) => deleteMovie(e, movie)}

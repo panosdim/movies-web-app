@@ -26,7 +26,7 @@ export const SearchResults: React.FC = () => {
         button.classList.add('is-loading');
 
         const data = {
-            title: movie.original_title,
+            title: movie.title ?? movie.name,
             overview: movie.overview,
             movie_id: movie.id,
             image: movie.poster_path,
@@ -91,7 +91,7 @@ export const SearchResults: React.FC = () => {
                                         </figure>
                                         <div className='media-content'>
                                             <div className='content'>
-                                                <p className='title is-3'>{movie.original_title}</p>
+                                                <p className='title is-3'>{movie.title ?? movie.name}</p>
                                                 <p className='subtitle is-5'>{movie.release_date}</p>
                                                 <br />
                                                 {movie.overview}
